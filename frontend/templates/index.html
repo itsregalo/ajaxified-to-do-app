@@ -5,6 +5,9 @@
 
 {% block body %}
     <div class="col-8 mt-5">
+       <div class="text-center mb-4">
+            <h2>Task Manager</h2>
+       </div>
         <form class="form-inline justify-content-center mx-3" 
             method="post" id="create-task" data-url="{% url 'tasks:index' %}">
             {% csrf_token %}
@@ -19,14 +22,14 @@
         </form>
     </div>
 
-    <div class="col-5 mt-5" id="task-list">
-        
+    <div class="col-5 mt-5" id="task-list"> 
         {% for task in tasks %}
-            <div class="card mb-1">
+            <div class="card mb-1" id="task-card" data-id="{{ task.id }}" 
+                style="{% if task.is_complete %} text-decoration: line-through {% endif %}">
                 <div class="card-body">
                     {{ task.title }}
 
-                    <button type="button" class="close float-right">
+                    <button type="button" class="close float-right" data-id="{{ task.id }}">
                         <span aria-hidden="true">&times;</span>
                       </button>
                 </div>
@@ -35,3 +38,7 @@
             
     </div>
 {% endblock body %}
+
+
+
+    
